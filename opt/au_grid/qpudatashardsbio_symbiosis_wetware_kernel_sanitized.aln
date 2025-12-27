@@ -1,0 +1,229 @@
+filename bio_symbiosis_wetware_kernel_sanitized.aln
+destination /opt/au_grid/qpudatashards
+aln Bio-Symbiosis Wetware Kernel (Sanitized)
+purpose Reality-safe, non-invasive orchestration of biosignal-inspired telemetry, EEG-grade inputs, and XR systems on commodity compute, with simulation-only “wetware” models and strict compliance logging.[file:4][file:5]
+
+bio_symbiosis.meta
+  name            BioSymbiosisKernel
+  version         1.2.1
+  role            Virtual-Wetware Orchestrator
+  layer           Simulation + XR + Non-Invasive BCI
+  safety_profile  NonInvasive-EEG-Only
+  description     Software-only ALN module that treats virtual “organs” as logical subsystems mapped to sensors, engines, and dashboards; all biological references are simulated, reversible, and audit-locked.[file:4][file:5]
+  regs_primary    GDPR, HIPAA, EUAIAct2024, NIST-SP-800-53, ISO-13485, ISO-14971[file:4][file:5]
+  ethics_framework NeuroRights(privacy, agency, identity, equality), BS8611, IEEE-EADv2[file:4][file:5]
+  bci_mode        NonInvasive-EEG-PPG-EDA-Only
+  prohibited_ops  Implants, pharmacological-mods, mutagens, gene-edits, tissue-ablation, uncontrolled EMF
+
+# --------------------------------------------------------------------
+# 1. Virtual organ topology (software-only “organs”)
+# --------------------------------------------------------------------
+virtual_organ_topology.csv
+destination-path,module,version,role,security-protocol,interop-standard,identity-mgmt,ai-agent-integration,device-type,authentication,digital-twin,edge-analytics,compliance,log-persistence
+vnode.bio_brain,BioSymbiosisKernel,1.2.1,SignalOrchestrator,TLS1.3-AES256-GCM,REST-JSON,OIDC,MistralQwenProxy,EEGHub,MultiFactorPQ,Enabled,EntropyLedger,GDPRHIPAA,HyperledgerVital[file:4][file:5]
+vnode.bio_heart,BioSymbiosisKernel,1.2.1,BioEthicsEngine,AES-256-GCM,GraphQL,FIDO2-WebAuthn,PolicyAgents,PolicyNode,BiometricVital,Enabled,RiskMetrics,BS8611-HIPAA,LogChainFull[file:4][file:5]
+vnode.bio_lungs,BioSymbiosisKernel,1.2.1,GameEngineAdapter,TLS1.3,TSN-QoS,OAuth2-Device,UnrealGodotXR,XREdge,FingerprintLife,Enabled,TSNLatency,NIST-80053,AuditS3[file:4][file:5]
+vnode.bio_neurons,BioSymbiosisKernel,1.2.1,WetwareSimulator,ChaCha20-Poly1305,gRPC-TLS,ALN-APIKey,NeuromorphicCoreSim,SimCluster,Enabled,SNNHealth,EU-MDR-ClassI,ImmutableLabLog[file:4]
+vnode.bio_skin,BioSymbiosisKernel,1.2.1,XRGuardRail,AES-256-GCM,WebXR-Safe,OIDC,XR-HMD,XRClient,Enabled,PrivacyPhi,NeuroRights,AuditTrailChain[file:5]
+vnode.bio_immune,BioSymbiosisKernel,1.2.1,TissueDepthGuardian,TLS1.3,DevicePolicyBus,FIDO2-WebAuthn,SafetyDaemon,EdgeNode,Enabled,SafetyScore,FCC-Part15,SIEMBridge[file:4][file:5]
+
+# Each vnode is a software service that routes and analyzes signals and events; no biological tissue is addressed or controlled.[file:4][file:5]
+
+# --------------------------------------------------------------------
+# 2. Safety envelopes (no real wetware writes)
+# --------------------------------------------------------------------
+bio_safety_envelopes.aln
+  envelope tissue_depth_mm
+    mode            NonInvasive
+    max_depth_mm    1.0
+    hard_cap_mm     1.5
+    enforcement     "Reject any configuration with depth_mm > max_depth_mm."
+    on_violation    "Disable session, notify safety_officer, log to HyperledgerVital."[file:4][file:5]
+
+  envelope rf_emf_limits
+    band_profile    "ELF 10–1000 Hz; RF per FCC Part 15 reference tables."
+    max_field_uT    100
+    control_mode    "Monitoring-only for human subjects; no actuation."
+    on_violation    "Drop RF-related command, enter SafeVisualMode, raise compliance_alert."[file:4]
+
+  envelope bio_data_privacy
+    pii_scope       "Neural-style signals, biosignals, behavioral logs."
+    minimization    "Only derived metrics (scores, features, entropy) leave device."
+    storage_policy  "Raw biosignal stored only in encrypted clinical or research vaults with IRB approval."
+    regs            [GDPR, HIPAA, NeuralPrivacyActs, State-NeuroLaws]
+    on_violation    "Freeze export job, quarantine dataset, require DPO + IRB review."[file:5]
+
+  envelope substrate_restrictions
+    allowed_substrate   "Digital simulation, commodity silicon hardware, virtual labs."
+    prohibited_substrate "In vivo organoids, implanted scaffolds, unapproved tissue cultures."
+    oversight_required  "Scientific-IRB + national ethics committee for any ex-vivo or clinical trial."
+    default_mode        "Simulated-only; no lab equipment control unless safety_kernel=true and regulator_approved=true."[file:4][file:5]
+
+# --------------------------------------------------------------------
+# 3. Symbiotic organ map (logical graph)
+# --------------------------------------------------------------------
+devtunnel.mermaid
+  graph TD
+    A[Core: BioSymbiosisKernel] --> B[Brain: Signal Orchestration]
+    A --> C[Heart: Ethics & Compliance]
+    A --> D[Lungs: XR Adapters]
+    A --> E[Neurons: Neuromorphic Simulation Grid]
+    A --> F[Skin: Privacy-Preserving XR Surface]
+    A --> G[Immune: Safety & Limits]
+    G --> H[Thresholds: RF + Depth]
+    H --> I[Parallel Streams: Secure Routing]
+    I --> A
+
+# All nodes represent containerized or process-level services consuming biosignal-like streams and XR events; they never drive medical devices or apply energy to subjects.[file:4][file:5]
+
+# --------------------------------------------------------------------
+# 4. Software organism (digital twin only)
+# --------------------------------------------------------------------
+organism wetware_vivus
+  dna_tree        aln_bio_tree
+  version         1.2.1
+  health_target   0.95
+  health_current  0.924
+  mode            "DigitalTwin-Only"
+  notes           "Software organism for testing policies, latency, and safety rules for BCI/XR-style pipelines; has no bindings to hardware actuators or clinical systems."[file:4][file:5]
+
+workflow bio_compliance_pulse
+  trigger         bio_event OR ethical_surge OR config_change
+  organs
+    organ tissue_threshold
+      action      validate_depth
+      rhythm      continuous
+      input       depth_mm
+      script ALN:
+        if depth_mm > tissue_depth_mm.max_depth_mm:
+           raise EthicalBreach "Non-invasive depth limit exceeded."
+           call safe_shutdown.session("depth_violation")
+           route alert -> vnode.bio_heart
+        end
+
+    organ biodegradable_core
+      role        storage_policy_sim
+      rhythm      event
+      params      material_profile="BiodegradableElectronics-SimOnly"
+      script ALN:
+        ensure "Only simulate degradation curves; no real implant control."
+        compute simulated_half_life_days := f(material_profile, environment_profile)
+        log_metric "bio_core_half_life_days", simulated_half_life_days
+
+    organ xr_adapter
+      action      render_ethical_overlay
+      engine      ["Unreal", "Godot"]
+      rhythm      drift
+      script ALN:
+        enforce XRGuard:
+          - mask raw biosignals (only show anonymized metrics)
+          - display consent-badges and RF/EMF estimate indicators
+          - enforce session_timeout <= configured_max
+        ensure game_engine cannot open device_bus directly (policy_id: XR-NODEVICE-DIRECT).[file:4][file:5]
+
+    organ multi_lang_parser
+      action      cross_parse_specs
+      languages   ["Rust", "Python", "Go", "ALN"]
+      adapter     "SafeInterop-Adapter"
+      script ALN:
+        sanitize all spec inputs via model_vector_sanitizer
+        forbid low-level hardware opcodes unless marked lab_sandbox=true and no-human-subjects=true
+
+secure_channel bio_security
+  encryption      ["AES-256-GCM", "TLS1.3", "ChaCha20-Poly1305"]
+  auth            ["FIDO2-WebAuthn", "OIDC"]
+  ethics_tags     ["HIPAA", "GDPR", "NeuralPrivacy", "OI-Consent"]
+  log_backend     "HyperledgerVital"
+  rule:
+    "Every biosignal route must attach ethics_tags and consent_token_id; otherwise drop."[file:4][file:5]
+
+evolve bio_adaptation
+  rule            bio_ethical_adapt
+  condition       organism.health_current < health_target OR system.ethics_score < 0.90
+  action          mutate_config
+  scope           [bio_safety_envelopes, xr_guardrails, data_minimization]
+  constraints     "Mutations may only tighten limits or improve privacy; no relaxation of safety envelopes."[file:5]
+
+monitor bio_dashboard
+  metrics         [tissue_depth_violation_count, rf_violation_count, xr_privacy_incidents, biosignal_entropy, edge_latency_ms]
+  exporters       ["Prometheus", "JSON-API"]
+  logs            [bio_operations, ethical_audits, rf_exposure_reports]
+  prometheus
+    scrape_interval 5s
+    labels          { env="lab-sim", city="Phoenix-AU-Grid" }
+
+# --------------------------------------------------------------------
+# 5. Dashboard configuration (charts only)
+# --------------------------------------------------------------------
+chart wetware_symbiosis_health
+  type line
+  axis_x ["12-20","12-21","12-22","12-23","12-24","12-25","12-26"]
+  dataset "Bio-Health %"
+    values [85.0, 87.0, 89.0, 90.0, 91.0, 92.0, 92.4]
+    semantics "Kernel test health (simulation metrics)."
+  dataset "Ethical Pulse / day"
+    values [0.5,0.7,0.9,1.0,1.1,1.2,1.3]
+    semantics "Number of ethics rule evaluations per day."
+
+# --------------------------------------------------------------------
+# 6. QPU Datashard (logical profile only)
+# --------------------------------------------------------------------
+filename qpudatashard_biosymbiosiscore_sanitized.aln
+destination /opt/au_grid/qpudatashards
+aln QPU Datashard – BioSymbiosis Core (Sanitized)
+purpose Routing profile for secure smart-city XR, next-gen gaming, and neuromorphic/BCI-style research with non-invasive, virtual-only wetware experiments and strict auditability.[file:4][file:5]
+
+datashardheader
+  destination-path,module,version,role,security-protocol,interop-standard,identity-mgmt,ai-agent-integration,device-type,authentication,digital-twin,edge-analytics,compliance,log-persistence
+  vnodeaugmentedcitygrid,BioSymbiosisKernel,1.2.1,UserAugment,TLS1.3-AES256,FIDO-ALN,WebAuthn,MistralQwen,WearableEEGEmu,BiometricVital,Enabled,SNNHealth,GDPRHIPAA,HyperledgerVital[file:4][file:5]
+  vnodesimulationlab,BioSymbiosisKernel,1.2.1,ResearchNode,ChaCha20-Poly1305,GraphQL-Safe,OAuthVital,ClaudeEnhance,QPU-Sim,MultiFactorLife,Enabled,AkidaBioSim,HIPAAEUAI,DIDVitalChain[file:4][file:5]
+  vnodeiothealthnet,BioSymbiosisKernel,1.2.1,IoTGuardian,TLS1.3,MQTT-Secure,OIDCVital,GPTAugment,SensorGrid,FingerprintLife,Disabled,None,NISTISO,DIDAuditLite[file:4][file:5]
+
+# --------------------------------------------------------------------
+# 7. Research actions (sanitized, simulation-first)
+# --------------------------------------------------------------------
+# The ten research_action blocks remain mathematically and legally grounded;
+# they are interpreted as research roadmaps and simulation study definitions only,
+# with no direct device control or real-subject protocols encoded.[file:4][file:5]
+
+# (Retain research_action 1..10 as-is from the source, since they already describe math,
+#  legal constraints, and simulation-oriented work; runtime parser can treat them
+#  as documentation / config, not executable control code.)
+
+include "bio_symbiosis_research_actions_1_10.aln"
+
+# --------------------------------------------------------------------
+# 8. Hex trivia (kept as metadata)
+# --------------------------------------------------------------------
+trivia_mode_answer_hex
+  value 0x4E6575726F2D416C6E2D42696F2D53796D62696F7369733A206F6E6C792073696D756C617465642C20616E6F6E796D697A65642C20636F6D706C69616E74204243492D585220706970656C696E6573
+
+# --------------------------------------------------------------------
+# 9. Neuromorphic/QPU & storage profile (infrastructure-only)
+# --------------------------------------------------------------------
+neuromorphic_profile
+  total_virtual_neurons  10000000
+  clusters               128
+  coherence_target       0.95
+  entropy_target         0.75
+
+storage_profile
+  partition data
+    size_pb     2.0
+    encryption  "AES-256-GCM"
+    role        "biosignal_features_only"
+  partition logs
+    size_pb     2.0
+    encryption  "AES-256-GCM"
+    role        "compliance_audit"
+  recovery
+    rule
+      path_label "data"
+      trigger    "corruption_detected"
+      restore    "from backup partition"
+  security
+    dna_mfa_enabled  true
+    zero_trust       true
+    blockchain_log   true
+
+# End of bio_symbiosis_wetware_kernel_sanitized.aln
